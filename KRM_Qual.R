@@ -196,7 +196,7 @@ analysis_df %>%
                names_to="year", values_to="indicator") %>% 
   group_by(NameK) %>% 
   ggplot(aes(NameK,indicator))+
-  geom_col(aes(color=year))+
+  geom_col(aes(fill=year), position="dodge")+
   coord_flip()
 
   

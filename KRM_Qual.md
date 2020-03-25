@@ -375,9 +375,9 @@ analysis_df %>%
   select(NameK, c(X16_ex_str, X17_ex_str)) %>% 
   pivot_longer(c(X16_ex_str, X17_ex_str),
                names_to="year", values_to="indicator") %>% 
-  group_by(NameK) %>% 
+  group_by(year) %>% 
   ggplot(aes(NameK,indicator))+
-  geom_col(aes(color=year))+
+  geom_point(aes(color=year))+
   coord_flip()
 ```
 
