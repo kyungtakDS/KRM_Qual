@@ -71,22 +71,51 @@ tm_shape(analysis_simp)+
 
 
 
-#+ fig.width=12, fig.height=12
-breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1)
-facets=c("X16_cap", "X17_cap", "X18_cap")
-tm_shape(analysis_simp)+
-  tm_polygons(facets, breaks=breaks)+
-  tm_facets(nrow=2)
-
-#' ***
-#' **Geometry만 제거하고 분석을 시작**
-analysis_df <- st_drop_geometry(analysis_simp)
-
+#' **분류**
 result <- c("X16_result", "X17_result")
 haz <- c("X16_hazard", "X17_hazard", "X18_hazard")
 expo <- c("X16_ex", "X17_ex")
 vul <- c("X16_vul", "X17_vul")
 cap <- c("X16_cap", "X17_cap", "X18_cap")
+
+
+
+#+ fig.width=12, fig.height=6
+breaks <-  c(0, 0.2, 0.4, 0.6, 0.8, 1)
+tm_shape(analysis_simp)+
+  tm_polygons(result, breaks=breaks, palette="Reds")+
+  tm_layout(title = "홍수위험지수")+
+  tm_facets(nrow=1)
+
+#+ fig.width=12, fig.height=4
+tm_shape(analysis_simp)+
+  tm_polygons(haz, breaks=breaks, palette="Oranges")+
+  tm_layout(title = "Hazard Index")+
+  tm_facets(nrow=1)
+
+#+ fig.width=12, fig.height=6
+tm_shape(analysis_simp)+
+  tm_polygons(expo, breaks=breaks, palette="Greens")+
+  tm_layout(title="Exposure Index")+
+  tm_facets(nrow=1)
+
+#+ fig.width=12, fig.height=6
+tm_shape(analysis_simp)+
+  tm_polygons(vul, breaks=breaks)+
+  tm_layout(title="Exposure Index")+
+  tm_facets(nrow=1)
+
+#+ fig.width=12, fig.height=4
+tm_shape(analysis_simp)+
+  tm_polygons(cap, breaks=breaks, palette="Blues")+
+  tm_layout(title="Capacity Index")+
+  tm_facets(nrow=1)
+
+
+
+#' ***
+#' **Geometry만 제거하고 분석을 시작**
+analysis_df <- st_drop_geometry(analysis_simp)
 
 
 #+ fig.width=12, fig.height=25

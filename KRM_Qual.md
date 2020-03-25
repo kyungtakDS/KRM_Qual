@@ -88,15 +88,62 @@ tm_shape(analysis_simp)+
 
 ![](KRM_Qual_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
+**분류**
+
+
 ```r
-breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1)
-facets=c("X16_cap", "X17_cap", "X18_cap")
-tm_shape(analysis_simp)+
-  tm_polygons(facets, breaks=breaks)+
-  tm_facets(nrow=2)
+result <- c("X16_result", "X17_result")
+haz <- c("X16_hazard", "X17_hazard", "X18_hazard")
+expo <- c("X16_ex", "X17_ex")
+vul <- c("X16_vul", "X17_vul")
+cap <- c("X16_cap", "X17_cap", "X18_cap")
 ```
 
-![](KRM_Qual_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+```r
+breaks <-  c(0, 0.2, 0.4, 0.6, 0.8, 1)
+tm_shape(analysis_simp)+
+  tm_polygons(result, breaks=breaks, palette="Reds")+
+  tm_layout(title = "홍수위험지수")+
+  tm_facets(nrow=1)
+```
+
+![](KRM_Qual_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+
+```r
+tm_shape(analysis_simp)+
+  tm_polygons(haz, breaks=breaks, palette="Oranges")+
+  tm_layout(title = "Hazard Index")+
+  tm_facets(nrow=1)
+```
+
+![](KRM_Qual_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+
+```r
+tm_shape(analysis_simp)+
+  tm_polygons(expo, breaks=breaks, palette="Greens")+
+  tm_layout(title="Exposure Index")+
+  tm_facets(nrow=1)
+```
+
+![](KRM_Qual_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+
+```r
+tm_shape(analysis_simp)+
+  tm_polygons(vul, breaks=breaks)+
+  tm_layout(title="Exposure Index")+
+  tm_facets(nrow=1)
+```
+
+![](KRM_Qual_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+
+```r
+tm_shape(analysis_simp)+
+  tm_polygons(cap, breaks=breaks, palette="Blues")+
+  tm_layout(title="Capacity Index")+
+  tm_facets(nrow=1)
+```
+
+![](KRM_Qual_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 ***
 **Geometry만 제거하고 분석을 시작**
@@ -104,12 +151,6 @@ tm_shape(analysis_simp)+
 
 ```r
 analysis_df <- st_drop_geometry(analysis_simp)
-
-result <- c("X16_result", "X17_result")
-haz <- c("X16_hazard", "X17_hazard", "X18_hazard")
-expo <- c("X16_ex", "X17_ex")
-vul <- c("X16_vul", "X17_vul")
-cap <- c("X16_cap", "X17_cap", "X18_cap")
 ```
 
 ```r
@@ -127,7 +168,7 @@ analysis_df %>%
   labs(title = "홍수피해위험지수")
 ```
 
-![](KRM_Qual_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](KRM_Qual_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```r
 # hazard 지수
@@ -144,7 +185,7 @@ analysis_df %>%
   labs(title = "Hazard Index")
 ```
 
-![](KRM_Qual_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](KRM_Qual_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 ```r
 # exposure 지수
@@ -161,7 +202,7 @@ analysis_df %>%
   labs(title = "Exposure Index")
 ```
 
-![](KRM_Qual_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](KRM_Qual_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 ```r
 # vulnerability 지수
@@ -178,7 +219,7 @@ analysis_df %>%
   labs(title = "Vulnerability Index")
 ```
 
-![](KRM_Qual_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](KRM_Qual_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 ```r
 # capacity 지수
@@ -195,7 +236,7 @@ analysis_df %>%
   labs(title = "Capacity Index")
 ```
 
-![](KRM_Qual_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](KRM_Qual_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 
 ---
